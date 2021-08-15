@@ -29,6 +29,20 @@ import { MetaService } from './meta.service';
       );      
     }
 
+    removerMeta(meta: String) :void {
+      this.metaService.remover(meta).subscribe(
+        am => {
+          if(am == null){
+            alert("um erro ocorreu ao tentar remover "+meta)
+          }else{
+            let index = this.metas.indexOf(meta);            
+            this.metas.splice(index, 1);                
+          }
+        },
+        msg  => { alert(msg.message);}
+      );      
+    }
+
     atualizarAluno(aluno: Aluno): void {
       this.alunoService.atualizar(aluno).subscribe(
          (a) => { if (a == null) {
@@ -43,7 +57,7 @@ import { MetaService } from './meta.service';
       this.alunoService.getAlunos()      
       .subscribe(
          (as) =>  { 
-           this.alunos = as;                     
+           this.alunos = as;                                
           },
          (msg) => { alert(msg.message); }
       );

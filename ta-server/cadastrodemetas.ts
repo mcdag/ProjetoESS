@@ -11,6 +11,18 @@ export class CadastroDeMetas {
       return result;
     }
 
+    remover(meta: String){
+      var result = null;
+
+      if(!this.metaNaoCadastrada(meta)){
+        let index = this.metas.indexOf(meta);
+        result = this.metas[index];
+        this.metas.splice(index, 1);      
+      }
+      
+      return result;
+    }
+
     metaNaoCadastrada(key: String) : boolean {
         return !this.metas.includes(key);
     }
@@ -21,7 +33,7 @@ export class CadastroDeMetas {
     //   return result;
     // }
  
-     getMetas(): String[]{
+     getMetas(): String[]{ 
       return this.metas;
     }
  }

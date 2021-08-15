@@ -4,7 +4,7 @@
     <th>CPF</th>
     <th>e-mail</th>
     <ng-container *ngFor="let m of metas" >
-      <th> {{m}}</th>
+      <th> {{m}} <button class="close" mat-button (click)="removerMeta(m)">X</button></th>
     </ng-container>   
  </tr>
 
@@ -14,8 +14,7 @@
     <td>{{a.email}}</td>
     <ng-container *ngFor="let m of metas" >
       <td class="meta"><input [(ngModel)]="a.metas[m]" (change)="atualizarAluno(a)"></td>
-    </ng-container>  
-
+    </ng-container>      
  </tr>
  </table>
 
