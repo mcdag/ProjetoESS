@@ -3,14 +3,24 @@
     <th>Nome</th>
     <th>CPF</th>
     <th>e-mail</th>
-    <th>Requisitos</th>
-    <th>Gerência de Configuração</th>
+    <ng-container *ngFor="let m of metas" >
+      <th> {{m}}</th>
+    </ng-container>   
  </tr>
+
  <tr *ngFor="let a of alunos">
     <td>{{a.nome}}</td>
     <td>{{a.cpf}}</td>
     <td>{{a.email}}</td>
-    <td class="meta"><input [(ngModel)]="a.metas['requisitos']" (change)="atualizarAluno(a)"></td>
-    <td class="meta"><input [(ngModel)]="a.metas['gerDeConfiguracao']" (change)="atualizarAluno(a)"></td>
+    <ng-container *ngFor="let m of metas" >
+      <td class="meta"><input [(ngModel)]="a.metas[m]" (change)="atualizarAluno(a)"></td>
+    </ng-container>  
+
  </tr>
  </table>
+
+ <div style="margin-top:20px;">
+   Adicionar metas:
+   <input type="text" #novaMeta name="novaMeta" placeholder="exemplo"> 
+   <button (click)="criarMeta(novaMeta.value)">Adicionar</button>
+</div>

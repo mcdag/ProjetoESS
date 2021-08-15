@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { MetasComponent } from './metas.component';
 import { AlunosComponent } from './alunos.component';
 import { AlunoService } from './aluno.service';
+import { MetaService } from './meta.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { AlunoService } from './aluno.service';
       }
     ])
   ],
-  providers: [AlunoService],
+  providers: [AlunoService, MetaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

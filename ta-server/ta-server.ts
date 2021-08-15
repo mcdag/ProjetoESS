@@ -3,10 +3,12 @@ import bodyParser = require("body-parser");
 
 import {Aluno} from '../common/aluno';
 import {CadastroDeAlunos} from './cadastrodealunos';
+import {CadastroDeMetas} from './cadastrodemetas';
 
 var taserver = express();
 
-var cadastro: CadastroDeAlunos = new CadastroDeAlunos();
+var cadastroAluno: CadastroDeAlunos = new CadastroDeAlunos();
+var cadastroMeta: CadastroDeMetas = new CadastroDeMetas();
 
 var allowCrossDomain = function(req: any, res: any, next: any) {
     res.header('Access-Control-Allow-Origin', "*");
@@ -19,12 +21,12 @@ taserver.use(allowCrossDomain);
 taserver.use(bodyParser.json());
 
 taserver.get('/alunos', function (req: express.Request, res: express.Response) {
-  res.send(JSON.stringify(cadastro.getAlunos()));
+  res.send(JSON.stringify(cadastroAluno.getAlunos()));
 })
 
 taserver.post('/aluno', function (req: express.Request, res: express.Response) {
   var aluno: Aluno = <Aluno> req.body; //verificar se é mesmo Aluno!
-  aluno = cadastro.cadastrar(aluno);
+  aluno = cadastroAluno.cadastrar(aluno);
   if (aluno) {
     res.send({"success": "O aluno foi cadastrado com sucesso"});
   } else {
@@ -34,13 +36,29 @@ taserver.post('/aluno', function (req: express.Request, res: express.Response) {
 
 taserver.put('/aluno', function (req: express.Request, res: express.Response) {
   var aluno: Aluno = <Aluno> req.body;
-  aluno = cadastro.atualizar(aluno);
+  aluno = cadastroAluno.atualizar(aluno);
   if (aluno) {
     res.send({"success": "O aluno foi atualizado com sucesso"});
   } else {
     res.send({"failure": "O aluno não pode ser atualizado"});
   }
 })
+
+
+taserver.get('/metas', function (req: express.Request, res: express.Response) {
+  res.send(JSON.stringify(cadastroMeta.getMetas()));
+})
+
+taserver.post('/meta/:name', function (req: express.Request, res: express.Response) {
+  let key = <String> req.params.name;
+  let meta = cadastroMeta.cadastrar(key);
+  if (meta) {
+    res.send({"success": "A meta foi cadastrado com sucesso"});
+  } else {
+    res.send({"failure": "O meta não pode ser cadastrado"});
+  }
+})
+
 
 var server = taserver.listen(3000, function () {
   console.log('Example app listening on port 3000!')
