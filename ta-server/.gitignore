@@ -1,4 +1,7 @@
 compiledCode/
 
+/node_modules
+
 *.js
 *.js.map
+ta-server/node_modules
