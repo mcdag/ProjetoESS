@@ -15,12 +15,14 @@ import { MetaService } from './meta.service';
 
     alunos: Aluno[];
     metas: string[];
+    nomeduplicado: boolean = false;
 
     criarMeta(meta: string): void {
       this.metaService.criar(meta).subscribe(
         am => {
           if(am == null){
-            alert("um erro ocorreu ao tentar cadastrar uma nova meta")
+            //alert("um erro ocorreu ao tentar cadastrar uma nova meta")
+            this.nomeduplicado = true;
           }else{
             this.metas.push(am);
           }
@@ -66,6 +68,10 @@ import { MetaService } from './meta.service';
       },
          (msg) => { alert(msg.message); }
       );
+    }
+
+    onMove(): void {
+      this.nomeduplicado = false;
     }
 
     ngOnInit(): void {      
