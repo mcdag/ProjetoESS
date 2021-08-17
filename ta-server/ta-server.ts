@@ -50,10 +50,11 @@ taserver.get('/metas', function (req: express.Request, res: express.Response) {
 })
 
 taserver.post('/meta/:name', function (req: express.Request, res: express.Response) {
-  let key = <String> req.params.name;
+  let key = <string> req.params.name;
   let meta = cadastroMeta.cadastrar(key);
 
   if (meta) {
+    cadastroAluno.cadastrarMeta(<string> key)
     res.send({"success": "A meta foi cadastrado com sucesso"});
   } else {
     res.send({"failure": "A meta não pode ser cadastrado"});
@@ -61,10 +62,11 @@ taserver.post('/meta/:name', function (req: express.Request, res: express.Respon
 })
 
 taserver.delete('/meta/:name', function (req: express.Request, res: express.Response){
-  let key = <String> req.params.name;
+  let key = req.params.name;
   let meta = cadastroMeta.remover(key);
   
   if (meta) {
+    cadastroAluno.removerMeta( key)
     res.send({"success": "A meta foi removida com sucesso"});
   } else {
     res.send({"failure": "A meta não pode ser removido"});

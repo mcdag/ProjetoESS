@@ -1,8 +1,8 @@
 
 export class CadastroDeMetas {
-    metas: String[] = [];
+    metas: string[] = [];
  
-     cadastrar(key: String) : String {
+     cadastrar(key: string) : string {
       var result = null;
       if (this.metaNaoCadastrada(key)) {
         this.metas.push(key);
@@ -11,7 +11,7 @@ export class CadastroDeMetas {
       return result;
     }
 
-    remover(meta: String){
+    remover(meta: string){
       var result = null;
 
       if(!this.metaNaoCadastrada(meta)){
@@ -23,7 +23,7 @@ export class CadastroDeMetas {
       return result;
     }
 
-    metaNaoCadastrada(key: String) : boolean {
+    metaNaoCadastrada(key: string) : boolean {
         return !this.metas.includes(key);
     }
  
@@ -33,7 +33,7 @@ export class CadastroDeMetas {
     //   return result;
     // }
  
-     getMetas(): String[]{ 
+     getMetas(): string[]{ 
       return this.metas;
     }
  }
