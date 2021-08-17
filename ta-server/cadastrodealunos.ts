@@ -3,6 +3,29 @@ import { Aluno } from '../common/aluno';
 export class CadastroDeAlunos {
    alunos: Aluno[] = [];
 
+    cadastrarMeta(meta: string): void {     
+      this.alunos.forEach(
+        aluno => {
+          aluno.metas.set(meta, "");
+      })
+    }
+
+    atualizarMeta(metaAntiga: string, metaNova: string): void {
+      this.alunos.forEach(
+        aluno => {   
+          aluno.metas.set(metaNova, aluno.metas[metaAntiga])                  
+          aluno.metas.delete(metaAntiga);
+      })
+    }
+
+    removerMeta(meta: string): void{
+      this.alunos.forEach(
+        aluno => {         
+          aluno.metas.delete(meta);
+      })
+      
+    }
+
     cadastrar(aluno: Aluno): Aluno {
      var result = null;
      if (this.cpfNaoCadastrado(aluno.cpf)) {

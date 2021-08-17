@@ -4,8 +4,8 @@
     <th>CPF</th>
     <th>e-mail</th>
     <ng-container *ngFor="let m of metas" >
-      <th> {{m}} <button class="close" mat-button (click)="removerMeta(m)">X</button></th>
-    </ng-container>   
+      <th> <input value={{m}} #meta (change)="atualizarMeta(m, meta.value)"> <button class="close" mat-button (click)="removerMeta(m)">X</button></th>
+    </ng-container>  
  </tr>
 
  <tr *ngFor="let a of alunos">

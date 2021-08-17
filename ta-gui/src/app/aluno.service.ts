@@ -13,6 +13,13 @@ export class AlunoService {
 
   constructor(private http: HttpClient) {}
 
+  // atualizarMeta(meta: string): Observable<any> {
+  //   return this.http.put<any>(this.taURL + "/alunometa",JSON.stringify(aluno), {headers: this.headers})          .pipe( 
+  //               retry(2),
+  //               map( res => {if (res.success) {return aluno;} else {return null;}} )
+  //             ); 
+  // }
+
   criar(aluno: Aluno): Observable<Aluno> {
     return this.http.post<any>(this.taURL + "/aluno", aluno, {headers: this.headers})
              .pipe( 
