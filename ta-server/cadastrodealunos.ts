@@ -6,7 +6,7 @@ export class CadastroDeAlunos {
     cadastrarMeta(meta: string): void {     
       this.alunos.forEach(
         aluno => {
-          aluno.metas.set(meta, "");
+          aluno.metas[meta] =  "";
       })
     }
 
@@ -20,10 +20,21 @@ export class CadastroDeAlunos {
 
     removerMeta(meta: string): void{
       this.alunos.forEach(
-        aluno => {         
-          aluno.metas.delete(meta);
+        aluno => {      
+          //cria aluno auxiliar para receber todas as metas
+          var alunoAux = new Aluno(); 
+          alunoAux.copyFrom(aluno);
+
+          // apaga todas as metas do aluno atual
+          aluno.metas = new Map<string, string>(); 
+
+          // aluno atual recebe todas as metas menos a meta a ser removida
+          for(let key in alunoAux.metas){
+            if(key != meta){
+              aluno.metas[key] = alunoAux.metas[key]
+            }
+          }   
       })
-      
     }
 
     cadastrar(aluno: Aluno): Aluno {
