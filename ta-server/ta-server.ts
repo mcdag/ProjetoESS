@@ -66,7 +66,7 @@ taserver.delete('/meta/:name', function (req: express.Request, res: express.Resp
   let meta = cadastroMeta.remover(key);
   
   if (meta) {
-    cadastroAluno.removerMeta( key)
+    cadastroAluno.removerMeta(key)
     res.send({"success": "A meta foi removida com sucesso"});
   } else {
     res.send({"failure": "A meta não pode ser removido"});
