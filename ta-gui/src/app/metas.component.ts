@@ -25,6 +25,10 @@ import { MetaService } from './meta.service';
             this.nomeduplicado = true;
           }else{
             this.metas.push(am);
+            this.alunos.forEach(
+              aluno => {
+                aluno.metas[meta] =  "";
+            })
           }
         },
         msg  => { alert(msg.message);}
