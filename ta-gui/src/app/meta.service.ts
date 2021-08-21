@@ -19,12 +19,13 @@ export class MetaService {
               ); 
   }
 
-//   atualizar(meta: string): Observable<Aluno> {
-//     return this.http.put<any>(this.taURL + "/aluno",JSON.stringify(aluno), {headers: this.headers})          .pipe( 
-//                 retry(2),
-//                 map( res => {if (res.success) {return aluno;} else {return null;}} )
-//               ); 
-//   }
+  atualizar(metaAntiga: string, metaNova: string): Observable<string> {
+    return this.http.put<any>(this.taURL + "/meta/" + metaAntiga + "/" +metaNova, {headers: this.headers})          
+            .pipe( 
+                retry(2),
+                map( res => {if (res.success) {return metaNova;} else {return null;}} )
+              ); 
+  }
 
   remover(meta: string): Observable<string> {
     return this.http.delete<any>(this.taURL + "/meta/"+ meta, {headers: this.headers})

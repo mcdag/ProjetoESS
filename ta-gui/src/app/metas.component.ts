@@ -31,19 +31,18 @@ import { MetaService } from './meta.service';
       );      
     }
 
-    atualizarMeta(metaAntiga: string, metaNova: string) :void {
-      console.log(metaAntiga + ": " + metaNova)
-    //   this.metaService.remover(meta).subscribe(
-    //     am => {
-    //       if(am == null){
-    //         alert("um erro ocorreu ao tentar remover "+meta)
-    //       }else{
-    //         let index = this.metas.indexOf(meta);            
-    //         this.metas.splice(index, 1);         
-    //       }
-    //     },
-    //     msg  => { alert(msg.message);}
-    //   );      
+    atualizarMeta(metaAntiga: string, metaNova: string) :void {  
+      this.metaService.atualizar(metaAntiga, metaNova).subscribe(
+        am => {
+          if(am == null){
+            alert("um erro ocorreu ao tentar atualizar a meta "+metaAntiga)
+          }else{
+            // let index = this.metas.indexOf(meta);            
+            // this.metas.splice(index, 1);         
+          }
+        },
+        msg  => { alert(msg.message);}
+      );      
     }
 
     removerMeta(meta: string) :void {

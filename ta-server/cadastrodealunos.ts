@@ -11,11 +11,12 @@ export class CadastroDeAlunos {
     }
 
     atualizarMeta(metaAntiga: string, metaNova: string): void {
+      
       this.alunos.forEach(
         aluno => {   
-          aluno.metas.set(metaNova, aluno.metas[metaAntiga])                  
-          aluno.metas.delete(metaAntiga);
+          aluno.metas[metaNova] = aluno.metas[metaAntiga];
       })
+      this.removerMeta(metaAntiga);
     }
 
     removerMeta(meta: string): void{

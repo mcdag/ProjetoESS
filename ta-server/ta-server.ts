@@ -44,17 +44,29 @@ taserver.put('/aluno', function (req: express.Request, res: express.Response) {
   }
 })
 
-
 taserver.get('/metas', function (req: express.Request, res: express.Response) {
   res.send(JSON.stringify(cadastroMeta.getMetas()));
 })
 
 taserver.post('/meta/:name', function (req: express.Request, res: express.Response) {
-  let key = <string> req.params.name;
+  let key =  req.params.name;
   let meta = cadastroMeta.cadastrar(key);
 
   if (meta) {
-    cadastroAluno.cadastrarMeta(<string> key)
+    cadastroAluno.cadastrarMeta(key)
+    res.send({"success": "A meta foi cadastrado com sucesso"});
+  } else {
+    res.send({"failure": "A meta não pode ser cadastrado"});
+  }
+})
+
+taserver.put('/meta/:antiga/:nova', function (req: express.Request, res: express.Response) {
+  let metaAntiga = req.params.antiga;
+  let metaNova = req.params.nova;
+  let meta = cadastroMeta.atualizar(metaAntiga, metaNova);
+  
+  if (meta) {   
+    cadastroAluno.atualizarMeta(metaAntiga, metaNova);
     res.send({"success": "A meta foi cadastrado com sucesso"});
   } else {
     res.send({"failure": "A meta não pode ser cadastrado"});
