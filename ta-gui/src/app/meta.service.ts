@@ -20,7 +20,7 @@ export class MetaService {
   }
 
   atualizar(metaAntiga: string, metaNova: string): Observable<string> {
-    return this.http.put<any>(this.taURL + "/meta/" + metaAntiga + "/" +metaNova, {headers: this.headers})          
+    return this.http.put<any>(this.taURL + "/meta/" + metaAntiga + "/" + metaNova, {headers: this.headers})          
             .pipe( 
                 retry(2),
                 map( res => {if (res.success) {return metaNova;} else {return null;}} )

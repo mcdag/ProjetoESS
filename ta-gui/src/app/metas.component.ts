@@ -35,14 +35,39 @@ import { MetaService } from './meta.service';
       this.metaService.atualizar(metaAntiga, metaNova).subscribe(
         am => {
           if(am == null){
-            alert("um erro ocorreu ao tentar atualizar a meta "+metaAntiga)
+            alert("Um erro ocorreu ao tentar atualizar a meta" + metaAntiga)
           }else{
-            // let index = this.metas.indexOf(meta);            
-            // this.metas.splice(index, 1);         
+            let index = this.metas.indexOf(metaAntiga);            
+            this.metas[index] = metaNova;
+            this.alunos.forEach(
+              aluno => {   
+                aluno.metas[metaNova] = aluno.metas[metaAntiga];
+            })
+            this.removerMetaFront(metaAntiga);
           }
         },
         msg  => { alert(msg.message);}
       );      
+    }
+
+
+    removerMetaFront(meta: string): void{
+      this.alunos.forEach(
+        aluno => {      
+          //cria aluno auxiliar para receber todas as metas
+          var alunoAux = new Aluno(); 
+          alunoAux.copyFrom(aluno);
+
+          // apaga todas as metas do aluno atual
+          aluno.metas = new Map<string, string>(); 
+
+          // aluno atual recebe todas as metas menos a meta a ser removida
+          for(let key in alunoAux.metas){
+            if(key != meta){
+              aluno.metas[key] = alunoAux.metas[key]
+            }
+          }   
+      })
     }
 
     removerMeta(meta: string) :void {
@@ -51,7 +76,8 @@ import { MetaService } from './meta.service';
           if(am == null){
             alert("um erro ocorreu ao tentar remover "+meta)
           }else{
-            let index = this.metas.indexOf(meta);            
+            let index = this.metas.indexOf(meta);  
+            console.log(index);       
             this.metas.splice(index, 1);         
           }
         },

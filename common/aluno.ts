@@ -34,4 +34,12 @@ export class Aluno {
       this.metas[key] = from[key];
     }
   }
+
+  inicializarMetas(from: string[]): Map<string,string>{
+    this.metas = new Map<string, string>();
+    for(let key in from){
+      this.metas[key] = "";
+    }
+    return this.metas;
+  }
 }
