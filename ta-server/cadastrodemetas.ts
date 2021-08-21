@@ -27,11 +27,15 @@ export class CadastroDeMetas {
         return !this.metas.includes(key);
     }
  
-    //  atualizar(aluno: Aluno): Aluno {
-    //   var result: Aluno = this.alunos.find(a => a.cpf == aluno.cpf);
-    //   if (result) result.copyFrom(aluno);
-    //   return result;
-    // }
+     atualizar(metaAntiga: string, metaNova: string): string {
+      var result =null;
+      if(!this.metaNaoCadastrada(metaAntiga)){        
+        this.cadastrar(metaNova);
+        this.remover(metaAntiga);
+        result = metaNova;
+      }
+      return result;
+    }
  
      getMetas(): string[]{ 
       return this.metas;
