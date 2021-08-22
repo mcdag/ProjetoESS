@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Aluno } from '../../../common/aluno';
 import { AlunoService } from './aluno.service';
+import { MetaService } from './meta.service';
 
   @Component({
    selector: 'app-root',
@@ -20,10 +21,11 @@ import { AlunoService } from './aluno.service';
        execução do método.
     */
     aluno: Aluno = new Aluno();
+    metas: string[] = [];
     alunos: Aluno[] = [];
     cpfduplicado: boolean = false;
 
-    constructor(private alunoService: AlunoService) {}
+    constructor(private alunoService: AlunoService, private metaService: MetaService) {}
 
     criarAluno(a: Aluno): void {
        /* Clone feito para que atraso na resposta da requisição
@@ -37,12 +39,14 @@ import { AlunoService } from './aluno.service';
           this.alunos, e consequentemente seriam também 
           refletidas em ar.
         */  
+       this.metas.forEach(meta => a.metas[meta] = "");
        this.alunoService.criar(a.clone())
              .subscribe(
                 ar => {
                   if (ar) {
                     this.alunos.push(ar);
                     this.aluno = new Aluno();
+                    
                   } else {
                     this.cpfduplicado = true;
                   } 
@@ -62,9 +66,16 @@ import { AlunoService } from './aluno.service';
      ngOnInit(): void {
        this.alunoService.getAlunos()
              .subscribe(
-               as => { this.alunos = as; },
+               as => { this.alunos = as; console.log(as);},
                msg => { alert(msg.message); }
               );
+        let metas =  this.metaService.getMetas().subscribe(
+          (as) =>  { 
+            this.metas = as;                  
+            },
+          (msg) => { alert(msg.message); }
+        );
+        
      }
 
   }

@@ -1,16 +1,36 @@
-<table>
- <tr>
-    <th>Nome</th>
-    <th>CPF</th>
-    <th>e-mail</th>
-    <th>Requisitos</th>
-    <th>Gerência de Configuração</th>
- </tr>
- <tr *ngFor="let a of alunos">
-    <td>{{a.nome}}</td>
-    <td>{{a.cpf}}</td>
-    <td>{{a.email}}</td>
-    <td class="meta"><input [(ngModel)]="a.metas['requisitos']" (change)="atualizarAluno(a)"></td>
-    <td class="meta"><input [(ngModel)]="a.metas['gerDeConfiguracao']" (change)="atualizarAluno(a)"></td>
- </tr>
- </table>
+<html (mousemove)="onMove()">
+  <table>
+  <tr>
+      <th>Nome</th>
+      <th>CPF</th>
+      <th>e-mail</th>
+      <ng-container *ngFor="let m of metas" >
+        <th> <input class="close" value={{m}} #meta (change)="atualizarMeta(m, meta.value)"> <button class="close" mat-button (click)="removerMeta(m)">X</button></th>
+      </ng-container>   
+  </tr>
+
+  <tr *ngFor="let a of alunos">
+      <td>{{a.nome}}</td>
+      <td>{{a.cpf}}</td>
+      <td>{{a.email}}</td>
+      <ng-container *ngFor="let m of metas" >
+        <td class="meta "[ngClass]="'meta'+ a.metas[m]"> 
+          <select [(ngModel)]="a.metas[m]" (change)="atualizarAluno(a)" name="select">
+            <option value="MANA" ng-model="MANA" ng-init="MANA=true">MANA</option>
+            <option value="MPA" ng-model="MPA" ng-init="MPA=true">MPA</option>
+            <option value="MA" ng-model="MA" ng-init="MA=true">MA</option>
+          </select> 
+        </td>
+      </ng-container>     
+  </tr>
+  </table>
+
+  <div style="margin-top:20px;">
+    Adicionar metas:
+    <input type="text" #novaMeta name="novaMeta" placeholder="exemplo"> 
+    <button (click)="criarMeta(novaMeta.value)">Adicionar</button>
+  </div>
+  <label nome="msgnomeexistente" *ngIf="nomeduplicado" color="red">
+    Já existe uma meta com esse nome
+</label>
+</html>

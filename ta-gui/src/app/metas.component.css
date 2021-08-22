@@ -1,23 +1,40 @@
 th {
-   background-color: #3399ff;
-   color: #ffffff;
- }
+  background-color: #3399ff;
+  color: #ffffff;
+}
 
-  td, th {
-   padding: 15px;
-   border-bottom: 1px solid #ddd;
- }
+ td, th {
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+}
 
-  tr:hover {
-   background-color: #cce6ff;
- }
+ tr:hover {
+  background-color: #cce6ff;
+}
 
-  .meta {
-   text-align: center;
-   width: 20px;
- }
+.close {
+  position: relative;
+  top: 0;
+  right: 0;
+  padding: 5px;
+  line-height: 14px;
+  min-width: auto;
+  width: 70px;
+}
 
-  .meta input {
-   border: none;
-   width: 40px;
- }
+.meta {
+ text-align: center;
+ width: 20px;
+}
+
+.metaMANA {
+ background-color: #D82E3F;
+}
+
+.metaMPA {
+ background-color: #FFF44F;
+}
+
+.metaMA {
+ background-color: #28CC2D;
+}

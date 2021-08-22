@@ -3,6 +3,41 @@ import { Aluno } from '../common/aluno';
 export class CadastroDeAlunos {
    alunos: Aluno[] = [];
 
+    cadastrarMeta(meta: string): void {     
+      this.alunos.forEach(
+        aluno => {
+          aluno.metas[meta] =  "";
+      })
+    }
+
+    atualizarMeta(metaAntiga: string, metaNova: string): void {
+      
+      this.alunos.forEach(
+        aluno => {   
+          aluno.metas[metaNova] = aluno.metas[metaAntiga];
+      })
+      this.removerMeta(metaAntiga);
+    }
+
+    removerMeta(meta: string): void{
+      this.alunos.forEach(
+        aluno => {      
+          //cria aluno auxiliar para receber todas as metas
+          var alunoAux = new Aluno(); 
+          alunoAux.copyFrom(aluno);
+
+          // apaga todas as metas do aluno atual
+          aluno.metas = new Map<string, string>(); 
+
+          // aluno atual recebe todas as metas menos a meta a ser removida
+          for(let key in alunoAux.metas){
+            if(key != meta){
+              aluno.metas[key] = alunoAux.metas[key]
+            }
+          }   
+      })
+    }
+
     cadastrar(aluno: Aluno): Aluno {
      var result = null;
      if (this.cpfNaoCadastrado(aluno.cpf)) {
