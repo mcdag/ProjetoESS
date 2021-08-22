@@ -5,7 +5,7 @@
       <th>CPF</th>
       <th>e-mail</th>
       <ng-container *ngFor="let m of metas" >
-        <th> <input value={{m}} #meta (change)="atualizarMeta(m, meta.value)"> <button class="close" mat-button (click)="removerMeta(m)">X</button></th>
+        <th> <input class="close" value={{m}} #meta (change)="atualizarMeta(m, meta.value)"> <button class="close" mat-button (click)="removerMeta(m)">X</button></th>
       </ng-container>   
   </tr>
 
@@ -14,8 +14,38 @@
       <td>{{a.cpf}}</td>
       <td>{{a.email}}</td>
       <ng-container *ngFor="let m of metas" >
-        <td class="meta"><input [(ngModel)]="a.metas[m]" (change)="atualizarAluno(a)"></td>
-      </ng-container>      
+        <td class="meta" *ngIf="a.metas[m] != 'MANA' && a.metas[m] != 'MPA' && a.metas[m] != 'MA'"> 
+          <select [(ngModel)]="a.metas[m]" (change)="atualizarAluno(a)" name="select">
+            <option value="MANA" ng-model="MANA" ng-init="MANA=true">MANA</option>
+            <option value="MPA" ng-model="MPA" ng-init="MPA=true">MPA</option>
+            <option value="MA" ng-model="MA" ng-init="MA=true">MA</option>
+          </select> 
+        </td>
+
+        <td class="metaMANA meta" *ngIf="a.metas[m] == 'MANA'">
+          <select [(ngModel)]="a.metas[m]" (change)="atualizarAluno(a)" name="select">
+            <option value="MANA" ng-model="MANA" ng-init="MANA=true">MANA</option>
+            <option value="MPA" ng-model="MPA" ng-init="MPA=true">MPA</option>
+            <option value="MA" ng-model="MA" ng-init="MA=true">MA </option>
+          </select> 
+        </td>
+
+        <td class="metaMPA meta" *ngIf="a.metas[m] == 'MPA'">
+          <select [(ngModel)]="a.metas[m]" (change)="atualizarAluno(a)" name="select">
+            <option value="MANA" ng-model="MANA" ng-init="MANA=true">MANA</option>
+            <option value="MPA" ng-model="MPA" ng-init="MPA=true">MPA</option>
+            <option value="MA" ng-model="MA" ng-init="MA=true">MA</option>
+          </select> 
+        </td>
+
+        <td class="metaMA meta" *ngIf="a.metas[m] == 'MA'">
+          <select [(ngModel)]="a.metas[m]" (change)="atualizarAluno(a)" name="select">
+            <option value="MANA" ng-model="MANA" ng-init="MANA=true">MANA</option>
+            <option value="MPA" ng-model="MPA" ng-init="MPA=true">MPA</option>
+            <option value="MA" ng-model="MA" ng-init="MA=true">MA</option>
+          </select> 
+        </td>
+      </ng-container>     
   </tr>
   </table>
 
