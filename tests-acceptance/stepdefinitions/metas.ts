@@ -36,5 +36,18 @@ defineSupportCode(function ({ Given, When, Then }) {
         var iguais = metas.filter(elem => mesmaMeta(elem,nome));
         await assertTamanhoEqual(iguais,1);
     });
+    
+    When(/^Eu tento mudar o nome da meta "([^\"]*)" para "([^\"]*)"$/, async (nomeAntiga, nomeNova) => {
+        var metas : ElementArrayFinder = element.all(by.name('inputmeta'));
+        var iguais = metas.filter(elem => mesmaMeta(elem,nomeAntiga));
+        await iguais.sendKeys(<string> nomeNova);
+        await element(by.name('novaMeta')).click();
+    });
+
+    Then('Eu nao consigo ver a meta {stringInDoubleQuotes} na lista de metas', async (nome) => {
+        var metas : ElementArrayFinder = element.all(by.name('inputmeta'));
+        var iguais = metas.filter(elem => mesmaMeta(elem,nome));
+        await assertTamanhoEqual(iguais,0);
+    });
 
 })
