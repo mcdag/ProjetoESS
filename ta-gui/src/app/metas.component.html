@@ -5,7 +5,7 @@
       <th>CPF</th>
       <th>e-mail</th>
       <ng-container *ngFor="let m of metas" >
-        <th> <input name = "inputmeta" class="close" value={{m}} #meta (change)="atualizarMeta(m, meta.value)"> <button class="close" mat-button (click)="removerMeta(m)">X</button></th>
+        <th> <input name = "inputmeta" class="close" value={{m}} #meta (change)="atualizarMeta(m, meta.value)"> <button name = "botaoremover" class="close" mat-button (click)="removerMeta(m)">X</button></th>
       </ng-container>   
   </tr>
 
