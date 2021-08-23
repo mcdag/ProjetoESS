@@ -5,20 +5,19 @@
       <th>CPF</th>
       <th>e-mail</th>
       <ng-container *ngFor="let m of metas" >
-        <th> <input name = "inputmeta" class="close" value={{m}} #meta (change)="atualizarMeta(m, meta.value)"> <button class="close" mat-button (click)="removerMeta(m)">X</button></th>
+        <th> <input name ="inputmeta" class="close" value={{m}} #meta (change)="atualizarMeta(m, meta.value)"> <button class="close" mat-button (click)="removerMeta(m)">X</button></th>
       </ng-container>   
   </tr>
-
-  <tr *ngFor="let a of alunos">
-      <td>{{a.nome}}</td>
-      <td>{{a.cpf}}</td>
+  <tr *ngFor="let a of alunos" name="alunolist">
+    <td name="nomelist">{{a.nome}}</td>
+    <td name="cpflist">{{a.cpf}}</td>
       <td>{{a.email}}</td>
       <ng-container *ngFor="let m of metas" >
-        <td class="meta "[ngClass]="'meta'+ a.metas[m]"> 
-          <select [(ngModel)]="a.metas[m]" (change)="atualizarAluno(a)" name="select">
-            <option value="MANA" ng-model="MANA" ng-init="MANA=true">MANA</option>
-            <option value="MPA" ng-model="MPA" ng-init="MPA=true">MPA</option>
-            <option value="MA" ng-model="MA" ng-init="MA=true">MA</option>
+        <td id="{{a.cpf+m}}" class="meta" [ngClass]="'meta'+ a.metas[m]"> 
+          <select [(ngModel)]="a.metas[m]" (change)="atualizarAluno(a)">
+            <option value="MANA" class="{{a.cpf+m+'MANA'}}" ng-model="MANA" ng-init="MANA=true">MANA</option>
+            <option value="MPA"  class="{{a.cpf+m+'MPA'}}"  ng-model="MPA" ng-init="MPA=true">MPA</option>
+            <option value="MA"  class="{{a.cpf+m+'MPA'}}"  ng-model="MA" ng-init="MA=true">MA</option>
           </select> 
         </td>
       </ng-container>     
