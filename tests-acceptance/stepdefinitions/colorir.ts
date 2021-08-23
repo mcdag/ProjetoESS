@@ -63,19 +63,19 @@ defineSupportCode(function ({ Given, When, Then }) {
         await $("a[name='metas']").click();
     })
     
-    Given(/^I see a student with CPF "(\d*)" in the students list"$/, async (cpf) => {
+    Given(/^I see a student with CPF "(\d*)" in the students list$/, async (cpf) => {
         await assertElementsWithSameCPF(1,cpf); 
     });
 
-    Given(/^ I see the students with CPF "(\d*)" has meta "([^\"]*)"$/, async (cpf, meta) => {
+    Given(/^I see the student with CPF "(\d*)" has meta "([^\"]*)"$/, async (cpf, meta) => {
         await criarMeta(meta);
         await assertElementsWithSameCPFAndMeta(1,cpf, meta); 
     });
-    When(/^ I select "([^\"]*)" to "([^\"]*)" for the student with CPF "(\d*)"  $/, async (nota, meta, cpf) => {
+    When(/^I select "([^\"]*)" to "([^\"]*)" for the student with CPF "(\d*)"$/, async (nota, meta, cpf) => {
         await criarNota(cpf, meta, nota);       
     });
     
-    Then(/^I can see "([^\"]*)" background in "([^\"]*)" $/, async (nota, color) => {
+    Then(/^I can see "([^\"]*)" background in "([^\"]*)"$/, async (nota, color) => {
         await assertElementsWithSameNotaAndColor(1,nota, color);
     });
     
