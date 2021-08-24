@@ -67,4 +67,9 @@ defineSupportCode(function ({ Given, When, Then }) {
         await botao.click();
     });
 
+    Then('Eu consigo ver uma mensagem de erro', async () => {
+        var erros : ElementArrayFinder = element.all(by.name('msgnomeexistente'));
+        await assertTamanhoEqual(erros,1);
+    });
+
 })

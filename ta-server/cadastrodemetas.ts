@@ -29,7 +29,7 @@ export class CadastroDeMetas {
  
      atualizar(metaAntiga: string, metaNova: string): string {
       var result =null;
-      if(!this.metaNaoCadastrada(metaAntiga)){        
+      if(!this.metaNaoCadastrada(metaAntiga) && this.metaNaoCadastrada(metaNova)){        
         this.cadastrar(metaNova);
         this.remover(metaAntiga);
         result = metaNova;
