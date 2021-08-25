@@ -29,7 +29,7 @@
     <input type="text" #novaMeta name="novaMeta" placeholder="exemplo"> 
     <button (click)="criarMeta(novaMeta.value)">Adicionar</button>
   </div>
-  <label name="msgnomeexistente" *ngIf="nomeduplicado" color="red">
+  <label name="msgmetaexistente" *ngIf="nomeduplicado" color="red">
     Já existe uma meta com esse nome
   </label>
 </html>
