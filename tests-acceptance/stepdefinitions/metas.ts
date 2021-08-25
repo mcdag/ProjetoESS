@@ -26,7 +26,17 @@ defineSupportCode(function ({ Given, When, Then }) {
         await assertTamanhoEqual(iguais,0);
     });
 
+    Given('Eu vejo uma meta com o nome {stringInDoubleQuotes}', async (nome) => {
+        await $("input[name='novaMeta']").clear();
+        await $("input[name='novaMeta']").sendKeys(<string> nome);
+        await element(by.buttonText('Adicionar')).click();
+        var metas : ElementArrayFinder = element.all(by.name('inputmeta'));
+        var iguais = metas.filter(elem => mesmaMeta(elem,nome));
+        await assertTamanhoEqual(iguais,1);
+    });
+
     When(/^Eu tento adicionar a meta "([^\"]*)"$/, async (nome) => {
+        await $("input[name='novaMeta']").clear();
         await $("input[name='novaMeta']").sendKeys(<string> nome);
         await element(by.buttonText('Adicionar')).click();
     });
@@ -35,6 +45,26 @@ defineSupportCode(function ({ Given, When, Then }) {
         var metas : ElementArrayFinder = element.all(by.name('inputmeta'));
         var iguais = metas.filter(elem => mesmaMeta(elem,nome));
         await assertTamanhoEqual(iguais,1);
+    });
+
+    When(/^Eu tento mudar o nome da meta "([^\"]*)" para "([^\"]*)"$/, async (nomeAntiga, nomeNova) => {
+        var metas : ElementArrayFinder = element.all(by.name('inputmeta'));
+        var iguais = metas.filter(elem => mesmaMeta(elem,nomeAntiga));
+        await iguais.sendKeys(<string> nomeNova);
+        await element(by.name('novaMeta')).click();
+    });
+
+    Then('Eu nao consigo ver a meta {stringInDoubleQuotes} na lista de metas', async (nome) => {
+        var metas : ElementArrayFinder = element.all(by.name('inputmeta'));
+        var iguais = metas.filter(elem => mesmaMeta(elem,nome));
+        await assertTamanhoEqual(iguais,0);
+    });
+
+    When(/^Eu tento remover a meta "([^\"]*)"$/, async (nome) => {
+        var metas : ElementArrayFinder = element.all(by.tagName('th'));
+        var escolhido = metas.filter(elem => elem.element(by.name('inputmeta')).getAttribute('value').then(text => text === nome));
+        var botao = escolhido.get(0).element(by.name('botaoremover'));
+        await botao.click();
     });
 
 })
