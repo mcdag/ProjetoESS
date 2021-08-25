@@ -5,7 +5,7 @@
       <th>CPF</th>
       <th>e-mail</th>
       <ng-container *ngFor="let m of metas" >
-        <th> <input class="close" value={{m}} #meta (change)="atualizarMeta(m, meta.value)"> <button class="close" mat-button (click)="removerMeta(m)">X</button></th>
+        <th> <input name="inputmeta" class="close" value={{m}} #meta (change)="atualizarMeta(m, meta.value)"> <button class="close" mat-button (click)="removerMeta(m)">X</button></th>
       </ng-container>   
   </tr>
 
@@ -30,7 +30,7 @@
     <input type="text" #novaMeta name="novaMeta" placeholder="exemplo"> 
     <button (click)="criarMeta(novaMeta.value)">Adicionar</button>
   </div>
-  <label nome="msgnomeexistente" *ngIf="nomeduplicado" color="red">
+  <label name="msgmetaexistente" *ngIf="nomeduplicado" color="red">
     Já existe uma meta com esse nome
 </label>
 </html>
