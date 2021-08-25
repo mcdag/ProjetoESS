@@ -14,3 +14,17 @@ Given Eu estou na pagina de metas
 Given Eu vejo uma meta com o nome "Requisitos"
 When Eu tento adicionar a meta "Requisitos"
 Then Eu consigo ver uma mensagem de erro
+Then Eu consigo ver a meta "Requisitos" na lista de metas
+
+Scenario: Atualizando uma meta
+Given Eu estou na pagina de metas
+Given Eu vejo uma meta com o nome "Testes"
+When Eu tento mudar o nome da meta "Testes" para "Refatoracao"
+Then Eu nao consigo ver a meta "Testes" na lista de metas
+Then Eu consigo ver a meta "Refatoracao" na lista de metas
+
+#Scenario: Removendo uma meta
+#Given Eu estou na pagina de metas
+#Given Eu vejo uma meta com o nome "Caligrafia"
+#When Eu tento remover a meta "Caligrafia"
+#Then Eu nao consigo ver a meta "Caligrafia" na lista de metas

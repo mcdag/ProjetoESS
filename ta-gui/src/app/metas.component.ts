@@ -39,7 +39,7 @@ import { MetaService } from './meta.service';
       this.metaService.atualizar(metaAntiga, metaNova).subscribe(
         am => {
           if(am == null){
-            alert("Um erro ocorreu ao tentar atualizar a meta" + metaAntiga)
+            alert("Um erro ocorreu ao tentar atualizar a meta " + metaAntiga)
           }else{
             let index = this.metas.indexOf(metaAntiga);            
             this.metas[index] = metaNova;
